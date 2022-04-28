@@ -80,13 +80,21 @@ class Alunos_model {
     }
     
     // criar um metodo so para realizar o update e buscar o select pelo getAlunos()
-    public function editar($conn, $row) 
+    public function editar($conn) 
     {
         $id= filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $editar_aluno = "SELECT * FROM alunos";
-        $onde= "WHERE id='$id'";
-        $resultado_editar = mysqli_query($conn, $editar_aluno, $onde);
-        $row = mysqli_fetch_assoc($resultado_editar);
+        $editar_aluno = "SELECT * FROM alunos WHERE id='$id'";
+        $resultado_editar = mysqli_query($conn, $editar_aluno);
+        return $resultado_editar;
+        
+    }
+
+    public function update($conn)
+    {
+        $update = $this->setDados();
+        $update = $this->editar($conn);
+        $update_aluno = "UPDATE alunos SET nome='$update[nome]', matricula='$update[matricula]', data_nasci='$update[dataNasc]', NOW() WHERE id='$this->id')";
+        $resultado_update = mysqli_query($conn, $update_aluno);
     }
 
     //Metodo para deletar o aluno clicando no link "excluir"

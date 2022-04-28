@@ -15,7 +15,7 @@ require_once "../view/pages/topo.php";
             unset($_SESSION['msg']);
           }
         ?>
-        <form method="post" action="/project/controller/Aluno.php" class="column g-3 needs-validation" novalidate>
+        <form method="post" action="/escola/controller/Aluno.php" class="column g-3 needs-validation" novalidate>
           <div class="col-md-3">
             <label class="form-label">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" value="" required>

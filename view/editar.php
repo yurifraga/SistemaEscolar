@@ -1,12 +1,8 @@
 <?php
 require_once "../view/pages/topo.php";
 require_once "../model/alunos_model.php";
-/////////////---TIRAR ISSO DAQUI-------////////////////////////////////////
-$id= filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-$editar_aluno = "SELECT * FROM alunos WHERE id='$id'";
-$resultado_editar = mysqli_query($conn, $editar_aluno);
-$row = mysqli_fetch_assoc($resultado_editar);
-/////////////////////////////////////////////////////////////////
+$editar = new Alunos_model;
+$row = mysqli_fetch_assoc($editar->editar($conn));
 ?>
   <head>
       <title>Editar Aluno</title>
@@ -15,7 +11,10 @@ $row = mysqli_fetch_assoc($resultado_editar);
     <div class="container">
       <div class="">
         <h1 style="margin-top: 50px" >Editar aluno</h1>
-        <form method="post" action="/project/view/update.php" class="column g-3 needs-validation" novalidate>
+        <form method="post" action="/escola/view/update.php" class="column g-3 needs-validation" novalidate>
+          <div class="col-md-3">
+            <input type="hidden" class="form-control" id="nome" name="nome" value="<?= $row['id'] ?>" required>
+          </div> 
           <div class="col-md-3">
             <label class="form-label">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" value="<?= $row['nome'] ?>" required>

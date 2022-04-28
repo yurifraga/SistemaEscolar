@@ -13,13 +13,13 @@ require_once "../view/pages/topo.php";
         <ul class="nav justify-content-end">
           <a class="navbar-brand justify-content">Portal escolar</a>
           <li class="nav-item">
-            <a class="nav-link" href="/project/view/alunos.php">Cadastrar Aluno</a>
+            <a class="nav-link" href="/escola/view/alunos.php">Cadastrar Aluno</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/project/view/professor.php">Cadastror Professor</a>
+            <a class="nav-link" href="/escola/view/professor.php">Cadastror Professor</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/project/view/listar.php">Lista de alunos</a>
+            <a class="nav-link" href="/escola/view/listar.php">Lista de alunos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">Sair</a>

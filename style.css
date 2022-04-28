@@ -1,0 +1,45 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('https://cdn.pixabay.com/photo/2015/12/01/15/43/black-1072366_960_720.jpg');
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    background-color: rgba(87, 86, 86, 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:80px;
+    border-radius: 15px;
+    color: #fff;
+}
+input{
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+button{
+    background-color: #9de0ad;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    color: #191013;
+    font-size: 15px;
+}
+button:hover{
+    background-color: #e5fcc2;
+    cursor: pointer;
+}
+.no-conta{
+    color: #fff;
+}
+.ancora:visited{
+    color: #fff;
+}
+.ancora:active{
+    color:#9de0ad
+}

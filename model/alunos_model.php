@@ -45,7 +45,7 @@ class Alunos_model {
         return $result;
     }
 
-    //Usar esse metodo para os selects
+    //METODO DO MODEL PARA BUSCAR OS ALUNOS NO BANCO DE DADOS
     public function getAlunos($conn)
     {
         $alunos_db = "SELECT * FROM alunos";
@@ -53,13 +53,13 @@ class Alunos_model {
         return $result_alunos;
     }
 
-    //Metodo para formatar a data e trazer para o formato br
+    //Metodo para formatar a data e trazer para o formato br ESSE METODO VAI PARA O CONTROLLER
     public function formatarData($data)
     {
         return date('d/m/Y', strtotime($data));
     }
 
-    //Metodo para preencher a tabela cada linha da lista de alunos usando o select do metodo getAlunos()
+    //ESSE METODO VAI PARA O CONTROLLER
     public function visualizar($conn)
     {
         $alunos = $this->getAlunos($conn);
@@ -75,12 +75,23 @@ class Alunos_model {
         return $resultado_editar;
     }
 
-    public function update($conn)
+    public function getDados()
     {
-        $update = $this->setDados();
-        $update = $this->editar($conn);
-        $update_aluno = "UPDATE alunos SET nome='$update[nome]', matricula='$update[matricula]', data_nasci='$update[dataNasc]', NOW() WHERE id='$this->id')";
+        $dados = array (
+            'id' => filter_input(INPUT_GET, 'id'),
+            'nome' => filter_input(INPUT_GET, 'nome'),
+            'matricula' => filter_input(INPUT_GET, 'matricula'),
+            'dataNasc' => filter_input(INPUT_GET, 'dataNasc'),
+        );
+        return $dados;
+    }
+
+    public function update($conn) //verificar a query pois não esta realizando o update no banco de dados
+    { 
+        $dados = $this->getDados();
+        $update_aluno = "UPDATE alunos SET nome='$this->dados[nome]', matricula='$this->dados[matricula]', data_nasci='$this->dados[dataNasc]', NOW() WHERE id='$this->dados['id']')";
         $resultado_update = mysqli_query($conn, $update_aluno);
+        
     }
 
     //Metodo para deletar o aluno clicando no link "excluir"

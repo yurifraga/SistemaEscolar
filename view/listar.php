@@ -34,7 +34,7 @@ require_once "../model/alunos_model.php";
               <td>".$listar->formatarData($row['data_nasci'])."</td>
               <td>
                 <a class='btn btn-primary btn-sm' href='editar.php?id=".$row['id']."'>Editar</a>
-                <a class='btn btn-danger btn-sm' href='deletar.php?id=".$row['id']."'>Excluir</a>
+                <a class='btn btn-danger btn-sm' href='javascript:goDelete(".$row['id'].")'>Excluir</a>
               </td>
             </tr>";
           }
@@ -44,3 +44,17 @@ require_once "../model/alunos_model.php";
     </table>
   </body>
 </html>
+<script>
+  //Mensagem de alerta para confirmar a exclusão
+	function goDelete(id){
+		var myUrl = 'deletar.php?id='+id
+		
+		if(confirm("Deseja realmente apagar esse registro?")){
+			window.location.href= myUrl;
+		} else {
+			alert("Registro não alterado");
+			return false;
+		}
+	}
+
+</script>

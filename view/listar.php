@@ -25,11 +25,22 @@ require_once "../model/alunos_model.php";
         <tr>
           <?php
           $listar = new Alunos_model;
-          $listar->visualizar($conn);
+          $listarAlunos = $listar->visualizar($conn);
+          while($row = $listarAlunos->fetch_assoc()) {
+            echo "<tr>
+              <td>".$row['nome']."</td>
+              <td>".$row['matricula']."</td>
+              <td>".$listar->getIdade($row['data_nasci'])."</td>
+              <td>".$listar->formatarData($row['data_nasci'])."</td>
+              <td>
+                <a class='btn btn-primary btn-sm' href='editar.php?id=".$row['id']."'>Editar</a>
+                <a class='btn btn-danger btn-sm' href='deletar.php?id=".$row['id']."'>Excluir</a>
+              </td>
+            </tr>";
+          }
           ?>
         </tr>
       </tbody>
-  </table>
-    
-</body>
+    </table>
+  </body>
 </html>

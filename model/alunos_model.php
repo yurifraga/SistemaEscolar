@@ -16,7 +16,6 @@ class Alunos_model {
         return $dados;
     }
     
-
     //Metodo para cadastrar o aluno, OBS: tirar o html e deixar so a query do INSERT
     public function cadastrar($conn)
     {
@@ -44,7 +43,6 @@ class Alunos_model {
             $result = $this->idade = intval($ano) - intval($anoNasc);
         }
         return $result;
-
     }
 
     //Usar esse metodo para os selects
@@ -65,18 +63,7 @@ class Alunos_model {
     public function visualizar($conn)
     {
         $alunos = $this->getAlunos($conn);
-        while($row = $alunos->fetch_assoc()) {
-            echo "<tr>
-              <td>".$row['nome']."</td>
-              <td>".$row['matricula']."</td>
-              <td>".$this->getIdade($row['data_nasci'])."</td>
-              <td>".$this->formatarData($row['data_nasci'])."</td>
-              <td>
-                <a class='btn btn-primary btn-sm' href='editar.php?id=".$row['id']."'>Editar</a>
-                <a class='btn btn-danger btn-sm' href='deletar.php?id=".$row['id']."'>Excluir</a>
-              </td>
-            </tr>";
-        }
+        return $alunos;
     }
     
     // criar um metodo so para realizar o update e buscar o select pelo getAlunos()
@@ -86,7 +73,6 @@ class Alunos_model {
         $editar_aluno = "SELECT * FROM alunos WHERE id='$id'";
         $resultado_editar = mysqli_query($conn, $editar_aluno);
         return $resultado_editar;
-        
     }
 
     public function update($conn)

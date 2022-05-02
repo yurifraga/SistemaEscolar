@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../verifica_login.php";
 require_once "../view/pages/topo.php";
 ?>
   <head>

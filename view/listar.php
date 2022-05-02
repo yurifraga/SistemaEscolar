@@ -2,6 +2,7 @@
 require_once "../view/pages/topo.php";
 require_once "../conexao.php" ;
 require_once "../model/alunos_model.php";
+require_once "../verifica_login.php";
 ?>
 <html lang="pt-br">
 <head>
@@ -25,7 +26,8 @@ require_once "../model/alunos_model.php";
         <tr>
           <?php
           $listar = new Alunos_model;
-          $listarAlunos = $listar->visualizar($conn);
+          $listarAlunos = $listar->setConn($conn);
+          $listarAlunos = $listar->visualizar();
           while($row = $listarAlunos->fetch_assoc()) {
             echo "<tr>
               <td>".$row['nome']."</td>

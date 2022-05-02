@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../view/pages/topo.php";
+require_once "../verifica_login.php";
 ?>
   <head>
       <title>Cadastrar Professor</title>

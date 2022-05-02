@@ -2,7 +2,7 @@
 session_start();
 require_once "../conexao.php";
 class Alunos_model {
-    public $dados;
+    public $conn = '';
 
     //Adicionar os valores para as variaveis
     public function setDados()
@@ -16,14 +16,19 @@ class Alunos_model {
         );
         return $dados;
     }
+
+    public function setConn($conn)
+    {
+        $this->conn = $conn;
+    }
     
     //Metodo para cadastrar o aluno, OBS: tirar o html e deixar so a query do INSERT
-    public function cadastrar($conn)
+    public function cadastrar()
     {
         $extrair = $this->setDados();
         $cadastrar_aluno = "INSERT INTO alunos (nome, matricula, data_nasci) VALUES ('$extrair[nome]', '$extrair[matricula]', '$extrair[dataNasc]')";
-        $resultado_cadastro = mysqli_query($conn, $cadastrar_aluno);
-        if(mysqli_insert_id($conn)){
+        $resultado_cadastro = mysqli_query($this->conn, $cadastrar_aluno);
+        if(mysqli_insert_id($this->conn)){
             $_SESSION['msg'] = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Cadastrado com sucesso</div>";
             header("Location: ../view/alunos.php");
         } else {
@@ -55,10 +60,10 @@ class Alunos_model {
     }
 
     //METODO DO MODEL PARA BUSCAR OS ALUNOS NO BANCO DE DADOS
-    public function getAlunos($conn)
+    public function getAlunos()
     {
         $alunos_db = "SELECT * FROM alunos";
-        $result_alunos = mysqli_query($conn, $alunos_db);
+        $result_alunos = mysqli_query($this->conn, $alunos_db);
         return $result_alunos;
     }
 
@@ -69,34 +74,34 @@ class Alunos_model {
     }
 
     //ESSE METODO VAI PARA O CONTROLLER
-    public function visualizar($conn)
+    public function visualizar()
     {
-        $alunos = $this->getAlunos($conn);
+        $alunos = $this->getAlunos();
         return $alunos;
     }
     
     // criar um metodo so para realizar o update e buscar o select pelo getAlunos()
-    public function editar($conn) 
+    public function editar() 
     {
         $id= filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         $editar_aluno = "SELECT * FROM alunos WHERE id='$id'";
-        $resultado_editar = mysqli_query($conn, $editar_aluno);
+        $resultado_editar = mysqli_query($this->conn, $editar_aluno);
         return $resultado_editar;
     }
 
-    public function update($conn) //verificar a query pois não esta realizando o update no banco de dados
+    public function update() //verificar a query pois não esta realizando o update no banco de dados
     { 
         $dados = $this->setDados();
         $update_aluno = "UPDATE alunos SET nome='$dados[nome]', matricula='$dados[matricula]', data_nasci='$dados[dataNasc]' WHERE id='$dados[id]'";
-        $resultado_update = mysqli_query($conn, $update_aluno);
+        $resultado_update = mysqli_query($this->conn, $update_aluno);
         
     }
 
     //Metodo para deletar o aluno clicando no link "excluir"
-    public function deletar($conn)
+    public function deletar()
     {   
         $id= filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         $excluir_aluno = "DELETE FROM alunos WHERE id='$id'";
-        $resultado_excluir = mysqli_query($conn, $excluir_aluno);
+        $resultado_excluir = mysqli_query($this->conn, $excluir_aluno);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 require_once "../view/pages/topo.php";
 require_once "../model/alunos_model.php";
+require_once "../verifica_login.php";
 $editar = new Alunos_model;
 $row = mysqli_fetch_assoc($editar->editar($conn));
 ?>

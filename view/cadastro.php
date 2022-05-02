@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -11,18 +8,11 @@ session_start();
   </head>
   <body>
     <div class="container">
-      <form method="post" action="../login.php" class="needs-validation" novalidate>
-        <h1>Login</h1>
-        <?php
-        if(isset($_SESSION['nao_autenticado'])):
-        ?>
-        <div class="notification is-danger">
-          <p style="color:red">Usuário ou senha inválidos.</p>
+      <form method="post" action="/escola/controller/Usuario.php" class="needs-validation" novalidate>
+        <h1>Cadastro de <br> colaborador</h1>
+        <div>
+          <input type="text" name="nome" id="nome" placeholder="Nome" ><br><br>
         </div>
-        <?php
-        endif;
-        unset($_SESSION['nao_autenticado']);
-        ?>
         <div>
           <input type="text" name="user" id="user" placeholder="Usuario" ><br><br>
         </div>
@@ -30,7 +20,7 @@ session_start();
           <input type="password" name="senha" id="senha" placeholder="Senha" ><br><br>
         </div>
         <p class="no-conta">
-          Não tem uma conta? <a class="ancora" href="/escola/view/cadastro.php">Clique aqui</a>
+          Já tem uma conta? <a class="ancora" href="/escola/view/home.php">Clique aqui</a>
         </p>
         <button class="btn-entrar" type="submit">Entrar</button>
       </form>

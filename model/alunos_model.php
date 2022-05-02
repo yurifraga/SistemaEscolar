@@ -8,6 +8,7 @@ class Alunos_model {
     public function setDados()
     {
         $dados = array (
+            'id' => $_POST['id'],
             'nome' => $_POST['nome'],
             'matricula' => $_POST['matricula'],
             'dataNasc' => $_POST['dataNasc'],
@@ -40,7 +41,15 @@ class Alunos_model {
             $result = 00;
         }else {
             list($anoNasc, $mesNasc, $diaNasc) = explode("-", $dataNascimento);
-            $result = $this->idade = intval($ano) - intval($anoNasc);
+            $this->idade = $ano - $anoNasc;
+            if($mes < $mesNasc){
+                $this->idade--;
+            }
+            if($dia < $diaNasc){
+                $this->idade--;
+            }
+            $result = $this->idade;
+             
         }
         return $result;
     }
@@ -75,21 +84,10 @@ class Alunos_model {
         return $resultado_editar;
     }
 
-    public function getDados()
-    {
-        $dados = array (
-            'id' => filter_input(INPUT_GET, 'id'),
-            'nome' => filter_input(INPUT_GET, 'nome'),
-            'matricula' => filter_input(INPUT_GET, 'matricula'),
-            'dataNasc' => filter_input(INPUT_GET, 'dataNasc'),
-        );
-        return $dados;
-    }
-
     public function update($conn) //verificar a query pois não esta realizando o update no banco de dados
     { 
-        $dados = $this->getDados();
-        $update_aluno = "UPDATE alunos SET nome='$this->dados[nome]', matricula='$this->dados[matricula]', data_nasci='$this->dados[dataNasc]', NOW() WHERE id='$this->dados['id']')";
+        $dados = $this->setDados();
+        $update_aluno = "UPDATE alunos SET nome='$dados[nome]', matricula='$dados[matricula]', data_nasci='$dados[dataNasc]' WHERE id='$dados[id]'";
         $resultado_update = mysqli_query($conn, $update_aluno);
         
     }

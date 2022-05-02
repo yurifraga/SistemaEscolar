@@ -13,7 +13,7 @@ $row = mysqli_fetch_assoc($editar->editar($conn));
         <h1 style="margin-top: 50px" >Editar aluno</h1>
         <form method="post" action="/escola/view/update.php" class="column g-3 needs-validation" novalidate>
           <div class="col-md-3">
-            <input type="hidden" class="form-control" id="nome" name="nome" value="<?= $row['id'] ?>" required>
+            <input type="hidden" class="form-control" id="id" name="id" value="<?= $row['id'] ?>" required>
           </div> 
           <div class="col-md-3">
             <label class="form-label">Nome:</label>

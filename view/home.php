@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_SESSION['user'])){
+  header('Location:/escola/view/alunos.php');
+};
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

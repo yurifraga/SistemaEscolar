@@ -1,4 +1,4 @@
 <?php
 if(!$_SESSION['user']){
-    header('Location:Location:/escola/view/home.php');
+    header('Location:/escola/view/home.php');
 }

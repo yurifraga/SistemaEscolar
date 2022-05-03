@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "../conexao.php";
 class Alunos_model {
     public $conn = '';
@@ -12,7 +11,8 @@ class Alunos_model {
             'nome' => $_POST['nome'],
             'matricula' => $_POST['matricula'],
             'dataNasc' => $_POST['dataNasc'],
-            'dataAtual' => date('d/m/Y')
+            'dataAtual' => date('d/m/Y'),
+            'turma' => $_POST['turma'],
         );
         return $dados;
     }
@@ -21,12 +21,12 @@ class Alunos_model {
     {
         $this->conn = $conn;
     }
-    
+
     //Metodo para cadastrar o aluno, OBS: tirar o html e deixar so a query do INSERT
     public function cadastrar()
     {
         $extrair = $this->setDados();
-        $cadastrar_aluno = "INSERT INTO alunos (nome, matricula, data_nasci) VALUES ('$extrair[nome]', '$extrair[matricula]', '$extrair[dataNasc]')";
+        $cadastrar_aluno = "INSERT INTO alunos (nome, matricula, data_nasci, id_turma) VALUES ('$extrair[nome]', '$extrair[matricula]', '$extrair[dataNasc]', '$extrair[turma]')";
         $resultado_cadastro = mysqli_query($this->conn, $cadastrar_aluno);
         if(mysqli_insert_id($this->conn)){
             $_SESSION['msg'] = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Cadastrado com sucesso</div>";
@@ -92,7 +92,7 @@ class Alunos_model {
     public function update() //verificar a query pois não esta realizando o update no banco de dados
     { 
         $dados = $this->setDados();
-        $update_aluno = "UPDATE alunos SET nome='$dados[nome]', matricula='$dados[matricula]', data_nasci='$dados[dataNasc]' WHERE id='$dados[id]'";
+        $update_aluno = "UPDATE alunos SET nome='$dados[nome]', matricula='$dados[matricula]', data_nasci='$dados[dataNasc]', id_turma=$dados[turma] WHERE id='$dados[id]'";
         $resultado_update = mysqli_query($this->conn, $update_aluno);
         
     }
@@ -103,5 +103,19 @@ class Alunos_model {
         $id= filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         $excluir_aluno = "DELETE FROM alunos WHERE id='$id'";
         $resultado_excluir = mysqli_query($this->conn, $excluir_aluno);
+    }
+
+    public function getTurma()
+    {
+        $sql = "SELECT * FROM turma";
+        $result_query = mysqli_query($this->conn, $sql);
+        return $result_query;
+    }
+
+    public function listarTurma($idTurma)
+    {   
+        $query = "SELECT turma.turma FROM alunos LEFT JOIN turma ON alunos.$idTurma = turma.id";
+        $result_query = mysqli_query($this->conn, $query);
+        return $result_query;
     }
 }

@@ -26,10 +26,10 @@ if(isset($_SESSION['user'])){
         endif;
         unset($_SESSION['nao_autenticado']);
         ?>
-        <div>
+        <div class="input">
           <input type="text" name="user" id="user" placeholder="Usuario" ><br><br>
         </div>
-        <div>
+        <div class="input">
           <input type="password" name="senha" id="senha" placeholder="Senha" ><br><br>
         </div>
         <p class="no-conta">

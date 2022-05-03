@@ -2,9 +2,12 @@
 session_start();
 require_once "../verifica_login.php";
 require_once "../view/pages/topo.php";
+require_once "../model/alunos_model.php";
+require_once "../conexao.php";
 ?>
   <head>
       <title>Cadastrar Aluno</title>
+      <meta charset="utf-8">
   </head>
   <body>
     <div class="container">
@@ -24,6 +27,20 @@ require_once "../view/pages/topo.php";
           <div class="col-md-3">
             <label class="form-label">Matricula:</label>
             <input type="text" class="form-control" id="matricula" name="matricula" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Turma:</label>
+            <select name="turma" id="turma" class="form-select" >
+              <option value="0">Selecione...</option>
+              <?php
+                  $listar = new Alunos_model;
+                  $conexao = $listar->setConn($conn);
+                  $listarTurmas = $listar->getTurma();
+                  while($row = mysqli_fetch_assoc($listarTurmas)){
+                    echo "<option value=".$row['id'].">".$row['turma']."</option>";
+                  }
+                ?>
+            </select><br>
           </div>
           <div class="col-md-3">
             <label class="form-label">Data de nascimento:</label>

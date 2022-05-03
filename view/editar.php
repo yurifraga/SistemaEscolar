@@ -1,9 +1,11 @@
 <?php
+session_start();
 require_once "../view/pages/topo.php";
 require_once "../model/alunos_model.php";
 require_once "../verifica_login.php";
 $editar = new Alunos_model;
-$row = mysqli_fetch_assoc($editar->editar($conn));
+$editar->setConn($conn);
+$row = mysqli_fetch_assoc($editar->editar());
 ?>
   <head>
       <title>Editar Aluno</title>
@@ -23,6 +25,15 @@ $row = mysqli_fetch_assoc($editar->editar($conn));
           <div class="col-md-3">
             <label class="form-label">Matricula:</label>
             <input type="text" class="form-control" id="matricula" name="matricula" value="<?= $row['matricula'] ?>" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Turma:</label>
+            <select name="turma" id="turma" class="form-select" >
+              <?php
+                     echo "<option value=".$row['id'].">".$row['id_turma']."</option>";
+                   
+                ?>
+            </select><br>
           </div>
           <div class="col-md-3">
             <label class="form-label">Data de nascimento:</label>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../view/pages/topo.php";
 require_once "../conexao.php" ;
 require_once "../model/alunos_model.php";
@@ -17,6 +18,7 @@ require_once "../verifica_login.php";
         <tr>
           <th>Nome</th>
           <th>Matricula</th>
+          <th>Turma</th>
           <th>Idade</th>
           <th>Data de nascimento</th>
           <th>Ações</th>
@@ -32,6 +34,7 @@ require_once "../verifica_login.php";
             echo "<tr>
               <td>".$row['nome']."</td>
               <td>".$row['matricula']."</td>
+              <td>".$row['id_turma']."</td>
               <td>".$listar->getIdade($row['data_nasci'])."</td>
               <td>".$listar->formatarData($row['data_nasci'])."</td>
               <td>

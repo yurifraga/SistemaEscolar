@@ -30,17 +30,16 @@ require_once "../verifica_login.php";
           $listar = new Alunos_model;
           $listarAlunos = $listar->setConn($conn);
           $listarAlunos = $listar->visualizar();
-          //listar nome das turmas e não o ID
-          foreach($listarAlunos as $turmas) {
+          foreach($listarAlunos as $alunos) {
             echo "<tr>
-              <td>".$turmas['nome']."</td>
-              <td>".$turmas['matricula']."</td>
-              <td>".$turmas['nome_turma']."</td>
-              <td>".$listar->getIdade($turmas['data_nasci'])."</td>
-              <td>".$listar->formatarData($turmas['data_nasci'])."</td>
+              <td>".$alunos['nome']."</td>
+              <td>".$alunos['matricula']."</td>
+              <td>".$alunos['nome_turma']."</td>
+              <td>".$listar->getIdade($alunos['data_nasci'])."</td>
+              <td>".$listar->formatarData($alunos['data_nasci'])."</td>
               <td>
-                <a class='btn btn-primary btn-sm' href='editar.php?id=".$turmas['id']."'>Editar</a>
-                <a class='btn btn-danger btn-sm' href='javascript:goDelete(".$turmas['id'].")'>Excluir</a>
+                <a class='btn btn-primary btn-sm' href='editar.php?id=".$alunos['id']."'>Editar</a>
+                <a class='btn btn-danger btn-sm' href='javascript:goDelete(".$alunos['id'].")'>Excluir</a>
               </td>
             </tr>";
           }

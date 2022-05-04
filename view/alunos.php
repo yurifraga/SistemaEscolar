@@ -3,6 +3,7 @@ session_start();
 require_once "../verifica_login.php";
 require_once "../view/pages/topo.php";
 require_once "../model/alunos_model.php";
+require_once "../model/turma_model.php";
 require_once "../conexao.php";
 ?>
   <head>
@@ -33,7 +34,7 @@ require_once "../conexao.php";
             <select name="turma" id="turma" class="form-select" >
               <option value="0">Selecione...</option>
               <?php
-                  $listar = new Alunos_model;
+                  $listar = new Turma_model;
                   $conexao = $listar->setConn($conn);
                   $listarTurmas = $listar->getTurma();
                   foreach($listarTurmas as $turmas){

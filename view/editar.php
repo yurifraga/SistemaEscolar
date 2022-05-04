@@ -2,9 +2,12 @@
 session_start();
 require_once "../view/pages/topo.php";
 require_once "../model/alunos_model.php";
+require_once "../model/turma_model.php";
 require_once "../verifica_login.php";
 $editar = new Alunos_model;
+$turma = new Turma_model;
 $editar->setConn($conn);
+$turma->setConn($conn);
 $row = mysqli_fetch_assoc($editar->editar());
 ?>
   <head>
@@ -30,7 +33,7 @@ $row = mysqli_fetch_assoc($editar->editar());
             <label class="form-label">Turma:</label>
             <select name="turma" id="turma" class="form-select" >
               <?php
-                $listarTurmas = $editar->getTurma();
+                $listarTurmas = $turma->getTurma();
                 foreach($listarTurmas as $turmas){ 
                   if($row['id_turma'] == $turmas['id']){
                     echo "<option value=".$turmas['id']." selected>".$turmas['turma']."</option>";

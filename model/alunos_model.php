@@ -104,11 +104,4 @@ class Alunos_model {
         $excluir_aluno = "DELETE FROM alunos WHERE id='$id'";
         $resultado_excluir = mysqli_query($this->conn, $excluir_aluno);
     }
-
-    public function getTurma()
-    {
-        $sql = "SELECT * FROM turma";
-        $result_query = mysqli_query($this->conn, $sql);
-        return $result_query;
-    }
 }

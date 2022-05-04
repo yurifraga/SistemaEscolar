@@ -19,6 +19,9 @@ require_once "../view/pages/topo.php";
             <a class="nav-link" href="/escola/view/professor.php">Cadastror Professor</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/escola/view/turma.php">Cadastror Turma</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/escola/view/listar.php">Lista de alunos</a>
           </li>
           <li class="nav-item">

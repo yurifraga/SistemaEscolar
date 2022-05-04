@@ -36,11 +36,11 @@ require_once "../conexao.php";
                   $listar = new Alunos_model;
                   $conexao = $listar->setConn($conn);
                   $listarTurmas = $listar->getTurma();
-                  while($row = mysqli_fetch_assoc($listarTurmas)){
-                    echo "<option value=".$row['id'].">".$row['turma']."</option>";
+                  foreach($listarTurmas as $turmas){
+                    echo "<option value=".$turmas['id'].">".$turmas['turma']."</option>";
                   }
                 ?>
-            </select><br>
+            </select>
           </div>
           <div class="col-md-3">
             <label class="form-label">Data de nascimento:</label>

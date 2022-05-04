@@ -30,10 +30,16 @@ $row = mysqli_fetch_assoc($editar->editar());
             <label class="form-label">Turma:</label>
             <select name="turma" id="turma" class="form-select" >
               <?php
-                     echo "<option value=".$row['id'].">".$row['id_turma']."</option>";
-                   
-                ?>
-            </select><br>
+                $listarTurmas = $editar->getTurma();
+                foreach($listarTurmas as $turmas){ 
+                  if($row['id_turma'] == $turmas['id']){
+                    echo "<option value=".$turmas['id']." selected>".$turmas['turma']."</option>";
+                  } else {
+                    echo "<option value=".$turmas['id'].">".$turmas['turma']."</option>";
+                  }
+                }
+              ?>
+            </select>
           </div>
           <div class="col-md-3">
             <label class="form-label">Data de nascimento:</label>

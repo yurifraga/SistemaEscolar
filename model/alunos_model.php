@@ -62,7 +62,7 @@ class Alunos_model {
     //METODO DO MODEL PARA BUSCAR OS ALUNOS NO BANCO DE DADOS
     public function getAlunos()
     {
-        $alunos_db = "SELECT * FROM alunos";
+        $alunos_db = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma";
         $result_alunos = mysqli_query($this->conn, $alunos_db);
         return $result_alunos;
     }
@@ -109,13 +109,6 @@ class Alunos_model {
     {
         $sql = "SELECT * FROM turma";
         $result_query = mysqli_query($this->conn, $sql);
-        return $result_query;
-    }
-
-    public function listarTurma($idTurma)
-    {   
-        $query = "SELECT turma.turma FROM alunos LEFT JOIN turma ON alunos.$idTurma = turma.id";
-        $result_query = mysqli_query($this->conn, $query);
         return $result_query;
     }
 }

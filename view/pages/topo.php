@@ -25,6 +25,9 @@ require_once "../view/pages/topo.php";
             <a class="nav-link" href="/escola/view/listar.php">Lista de alunos</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/escola/view/listarTurmas.php">Lista de Turmas</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/escola/logout.php">Sair</a>
           </li>
         </ul>

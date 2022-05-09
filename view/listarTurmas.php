@@ -31,29 +31,33 @@ $conexao = $listar->setConn($conn);
             </select>
         </div>
         <div class="col-5" style="margin-top:10px">
-            <button class="btn btn-primary" form="formulario" id="buscar" type="submit">Buscar</button>
+            <button class="btn btn-primary" form="formulario" id="buscar" type="button">Buscar</button>
+        </div>
+        <div class="result">
+            
         </div>
     </form>
     
     <script>
-        //////função para desabilitar o refresh da pagina ao clicar no botao de submit
-        //$('#formulario').submit(function(e)
-        function buscar(turma)
-        {
-            //e.preventDefault();
-            //var turma = $('#turma');
-            
+        //////////////Não esta funcionando//////////////////////
+       /*  $('#formulario').submit(function(e){
+            e.preventDefault(); */
+        $('#buscar').on('click', function(){
+            var turma = $("#turma").val();
             $.ajax({
-                url: '../view/selecionarturmas.php',
-                method: 'POST',
-                data: {turma: turma},
-                dataType: 'hmtl',
+                url:"../view/selecionarturmas.php",
+                type:"POST",
+                dataType:'html',
+                data:{turma: turma},
+                success:function(result){
+                    $(".result").html(result);
+                },
+                error: function(){
+                    $(".result").html("Error");
+                }
             });
-        }
-        $('#buscar').click(function () {
-            console.log($("#turma").val())
-            //buscar($("#turma").val())
         });
+        //});
 
     </script>
   </body>

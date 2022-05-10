@@ -39,9 +39,6 @@ $conexao = $listar->setConn($conn);
     </form>
     
     <script>
-        //////////////Não esta funcionando//////////////////////
-       /*  $('#formulario').submit(function(e){
-            e.preventDefault(); */
         $('#buscar').on('click', function(){
             var turma = $("#turma").val();
             $.ajax({
@@ -57,7 +54,6 @@ $conexao = $listar->setConn($conn);
                 }
             });
         });
-        //});
 
     </script>
   </body>

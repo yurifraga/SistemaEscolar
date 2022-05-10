@@ -7,7 +7,6 @@ $listarAlunos = $listar->setConn($conn);
 
 $turmas = $_POST['turma'];
 
-//$sql = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma";
 $sql = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma WHERE alunos.id_turma = $turmas";
 $resultado_query = mysqli_query($conn, $sql);
 ?>

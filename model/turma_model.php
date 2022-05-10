@@ -34,4 +34,13 @@ class Turma_model {
         $result_query = mysqli_query($this->conn, $sql);
         return $result_query;
     }
+
+    public function getTurmaByAlunos()
+    {
+        $extrair = $this->setDados();
+        $sql = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma WHERE alunos.id_turma = $extrair[turma]";
+        $resultado_query = mysqli_query($this->conn, $sql);
+        return $resultado_query;
+
+    }
 }

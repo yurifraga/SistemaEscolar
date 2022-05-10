@@ -1,19 +1,17 @@
 <?php
-require_once "../conexao.php";
 require_once "../model/alunos_model.php";
+require_once "../model/turma_model.php";
 
 $listar = new Alunos_model;
-$listarAlunos = $listar->setConn($conn);
 
-$turmas = $_POST['turma'];
+$turmas = new Turma_model;
+$conexao = $turmas->setConn($conn);
+$listarTurma = $turmas->getTurmaByAlunos();
 
-$sql = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma WHERE alunos.id_turma = $turmas";
-$resultado_query = mysqli_query($conn, $sql);
 ?>
 <section class="painel col-lg-9">
 
     <header class="painel-heading">
-        Turma : <?=$turmas;?>
     </header>
         <table class="table">
             <thead>
@@ -28,7 +26,7 @@ $resultado_query = mysqli_query($conn, $sql);
             </thead>
             <tbody>
                 <?php
-                foreach($resultado_query as $turmaSelecionada){
+                foreach($listarTurma as $turmaSelecionada){
                 ?>
                 <tr>
                     <td><?=$turmaSelecionada['nome']?></td>

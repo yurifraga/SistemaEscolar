@@ -4,9 +4,11 @@ require_once "../model/turma_model.php";
 
 $listar = new Alunos_model;
 
+$turma = $_POST['turma'];
+
 $turmas = new Turma_model;
 $conexao = $turmas->setConn($conn);
-$listarTurma = $turmas->getTurmaByAlunos();
+$listarTurma = $turmas->setOrder('nome')->getTurmaByAlunos($turma);
 
 ?>
 <section class="painel col-lg-9">

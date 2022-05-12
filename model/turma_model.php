@@ -35,10 +35,23 @@ class Turma_model {
         return $result_query;
     }
 
-    public function getTurmaByAlunos()
+    public function setOrder($campo)
     {
-        $extrair = $this->setDados();
-        $sql = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma WHERE alunos.id_turma = $extrair[turma]";
+        $this->order_by = $campo;
+        return $this;
+    }
+
+    public function orderPadrao()
+    {
+        return $this->setOrder('nome');
+    }
+
+    public function getTurmaByAlunos($turma)
+    {
+        $sql = "SELECT alunos.*, turma.turma as nome_turma FROM alunos left join turma on turma.id = alunos.id_turma WHERE alunos.id_turma = ".$turma;
+        if (isset($this->order_by) && $this->order_by!='') {
+            $sql .= ' order by '.$this->order_by.' asc';
+        }
         $resultado_query = mysqli_query($this->conn, $sql);
         return $resultado_query;
 

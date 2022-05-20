@@ -21,8 +21,19 @@ class Usuarios_model {
     public function cadastrar()
     {
         $extrair = $this->setDados();
-        $resultado_cadastro = mysqli_query($this->conn,"INSERT INTO usuarios (nome, user, senha) VALUES ('$extrair[nome]', '$extrair[user]','$extrair[senha]')");
-        return $resultado_cadastro;
+        
+        //Verifica se já existe um user cadastrado
+        $query = mysqli_query($this->conn, "SELECT id FROM usuarios where user = '$extrair[user]'");
+        $row = mysqli_num_rows($query);
+
+        if($row > 0 ){
+            return false; // já esta cadastrado
+            exit();
+        } else {
+            $resultado_cadastro = mysqli_query($this->conn,"INSERT INTO usuarios (nome, user, senha) VALUES ('$extrair[nome]', '$extrair[user]','$extrair[senha]')");
+            return $resultado_cadastro;
+        }
+
     }
 
     public function logar()

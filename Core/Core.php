@@ -2,7 +2,7 @@
 
 class Core {
 
-    public functuin __construct()
+    public function __construct()
     {
         $this->run();
     }
